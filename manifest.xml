@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+  <Id>6f7a2a9e-2c2c-4c6d-a2d3-7fd6a2b1b9ea</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>COD</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Starfish Student Lookup"/>
+  <Description DefaultValue="Grab an email/ID from the current message and open Starfish in your browser."/>
+  <IconUrl DefaultValue="https://localhost/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://localhost/"/>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets DefaultMinVersion="1.8">
+      <Set Name="Mailbox"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead"/>
+  </FormSettings>
+
+  <Permissions>ReadItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.8">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+
+    <!-- ribbon button -->
+    <Hosts>
+      <Host xsi:type="Mailbox">
+        <ExtensionPoint xsi:type="MessageReadCommandSurface">
+          <OfficeTab id="TabDefault">
+            <Group id="Starfish.Group" label="Student Tools">
+              <Control xsi:type="Button" id="Starfish.Command">
+                <Label resid="resBtnLabel"/>
+                <Supertip>
+                  <Title resid="resBtnLabel"/>
+                  <Description resid="resBtnDesc"/>
+                </Supertip>
+                <Icon>
+                  <bt:Image size="16" resid="icon16"/>
+                  <bt:Image size="32" resid="icon32"/>
+                  <bt:Image size="80" resid="icon80"/>
+                </Icon>
+                <Action xsi:type="ExecuteFunction">
+                  <FunctionName>openStarfish</FunctionName>
+                </Action>
+              </Control>
+            </Group>
+          </OfficeTab>
+        </ExtensionPoint>
+      </Host>
+    </Hosts>
+
+    <!-- resources -->
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://localhost/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://localhost/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://localhost/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <!-- Function file (commands) -->
+        <bt:Url id="funcfile" DefaultValue="https://localhost/commands.html"/>
+        <!-- Dialog relay page that opens a normal browser tab and exits -->
+        <bt:Url id="relay" DefaultValue="https://localhost/relay.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="resBtnLabel" DefaultValue="Search in Starfish"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="resBtnDesc" DefaultValue="Grab selected text (or sender/recipient) and search it in COD Starfish."/>
+      </bt:LongStrings>
+    </Resources>
+
+    <WebApplicationInfo>
+      <!-- not using SSO; omit -->
+    </WebApplicationInfo>
+
+    <!-- point to JavaScript that defines the ExecuteFunction -->
+    <FunctionFile resid="funcfile"/>
+  </VersionOverrides>
+</OfficeApp>
