@@ -5,7 +5,7 @@
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
   <Id>6f7a2a9e-2c2c-4c6d-a2d3-7fd6a2b1b9ea</Id>
-  <Version>1.0.1.0</Version>
+  <Version>1.0.3.0</Version>
   <ProviderName>COD</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Starfish Student Lookup"/>
@@ -16,7 +16,9 @@
 
   <Hosts><Host Name="Mailbox"/></Hosts>
 
-  <Requirements><Sets DefaultMinVersion="1.8"><Set Name="Mailbox"/></Sets></Requirements>
+  <!-- Lowered requirement to be extra compatible -->
+  <Requirements><Sets DefaultMinVersion="1.3"><Set Name="Mailbox"/></Sets></Requirements>
+
   <FormSettings><Form xsi:type="ItemRead"/></FormSettings>
   <Permissions>ReadItem</Permissions>
 
@@ -27,7 +29,7 @@
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
 
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
-    <Requirements><bt:Sets DefaultMinVersion="1.8"><bt:Set Name="Mailbox"/></bt:Sets></Requirements>
+    <Requirements><bt:Sets DefaultMinVersion="1.3"><bt:Set Name="Mailbox"/></bt:Sets></Requirements>
 
     <Hosts>
       <Host xsi:type="Mailbox">
@@ -69,7 +71,7 @@
         <bt:String id="resBtnLabel" DefaultValue="Search in Starfish"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="resBtnDesc" DefaultValue="Use the From address of the focused message to search in COD Starfish."/>
+        <bt:String id="resBtnDesc" DefaultValue="Open Starfish with the current message's From address."/>
       </bt:LongStrings>
     </Resources>
 
